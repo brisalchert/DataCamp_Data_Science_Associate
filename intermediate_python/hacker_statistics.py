@@ -29,6 +29,10 @@ for i in range(10000):
         else:
             step = step + np.random.randint(1, 7)
 
+        # Implement clumsiness
+        if np.random.rand() <= 0.005:
+            step = 0
+
         # append next_step to random_walk
         random_walk.append(step)
 
