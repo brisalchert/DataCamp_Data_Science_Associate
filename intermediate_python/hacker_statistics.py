@@ -30,7 +30,7 @@ for i in range(10000):
             step = step + np.random.randint(1, 7)
 
         # Implement clumsiness
-        if np.random.rand() <= 0.005:
+        if np.random.rand() <= 0.001:
             step = 0
 
         # append next_step to random_walk
@@ -45,5 +45,9 @@ np_all_walks = np.array(all_walks)
 # Transpose np_final_steps
 np_all_walks_transposed = np.transpose(np_all_walks)
 
-plt.plot(np_all_walks_transposed)
+# Select the last row of the transposed walks (endpoints)
+ends = np_all_walks_transposed[-1, :]
+
+# Plot histogram of endpoints
+plt.hist(ends)
 plt.show()
