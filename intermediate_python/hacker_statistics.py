@@ -51,3 +51,14 @@ ends = np_all_walks_transposed[-1, :]
 # Plot histogram of endpoints
 plt.hist(ends)
 plt.show()
+
+# Calculate chance of reaching step 60
+count = 0
+
+for endpoint in ends:
+    if endpoint >= 60:
+        count += 1
+
+probability = count / len(ends)
+
+print("Chance of reaching step 60: " + str(probability * 100) + "%")
