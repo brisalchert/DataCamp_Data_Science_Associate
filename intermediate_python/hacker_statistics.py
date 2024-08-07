@@ -16,7 +16,8 @@ for x in range(100) :
 
     # Determine next step
     if dice <= 2:
-        step = step - 1
+        # Do not allow negative steps
+        step = max(step - 1, 0)
     elif dice <= 5:
         step = step + 1
     else:
