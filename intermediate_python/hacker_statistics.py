@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Set seed for reproducibility
 np.random.seed(123)
@@ -26,5 +27,6 @@ for x in range(100) :
     # append next_step to random_walk
     random_walk.append(step)
 
-# Print random_walk
-print(random_walk)
+# Plot the random walk
+plt.plot(random_walk)
+plt.show()
