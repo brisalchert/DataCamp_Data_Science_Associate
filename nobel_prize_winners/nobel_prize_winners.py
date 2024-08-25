@@ -60,3 +60,16 @@ max_female_row = female_ratios.max()
 # Store the decade and category in a dictionary
 max_female_dict = {int(max_female_row['decade']):max_female_row['category']}
 print(max_female_dict)
+
+# Create dataframe of female winners
+female_winners = nobel[nobel['female'] == True]
+
+# Get the row with the minimum year
+first_woman = female_winners[female_winners['year'] ==female_winners['year'].min()]
+
+# Save the name and category to strings
+first_woman_name = first_woman['full_name'].values[0]
+first_woman_category = first_woman['category'].values[0]
+
+print(first_woman_name)
+print(first_woman_category)
