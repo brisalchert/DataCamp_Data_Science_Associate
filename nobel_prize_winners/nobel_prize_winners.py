@@ -91,5 +91,5 @@ prize_counts = nobel.groupby('full_name', as_index=False)['prize'].count()
 multiple_prizes = prize_counts[prize_counts['prize'] > 1]
 
 # Convert the name column to a list
-repeat_list = multiple_prizes['full_name'].values
+repeat_list = list(multiple_prizes['full_name'].values)
 print(repeat_list)
