@@ -61,10 +61,10 @@ nobel['female'] = np.where(nobel['sex'] == 'Female', True, False)
 female_ratios = nobel.groupby(['decade', 'category'], as_index=False)['female'].mean()
 
 # Get the row with the highest ratio
-max_female_row = female_ratios.max()
+max_female_row = female_ratios[female_ratios['female'] == female_ratios['female'].max()]
 
 # Store the decade and category in a dictionary
-max_female_dict = {int(max_female_row['decade']):max_female_row['category']}
+max_female_dict = {int(max_female_row['decade'].values[0]):max_female_row['category'].values[0]}
 print(max_female_dict)
 
 # ----------------------------------------------------------------------------------------------------------------------
