@@ -47,3 +47,16 @@ print(max_decade_usa)
 # Plot the ratio data
 sns.relplot(x='decade', y='us_born', data=us_ratios, kind='line')
 plt.show()
+
+# Create a flag column for female winners
+nobel['female'] = np.where(nobel['sex'] == 'Female', True, False)
+
+# Calculate the mean value of 'female' for each decade and prize category
+female_ratios = nobel.groupby(['decade', 'category'], as_index=False)['female'].mean()
+
+# Get the row with the highest ratio
+max_female_row = female_ratios.max()
+
+# Store the decade and category in a dictionary
+max_female_dict = {int(max_female_row['decade']):max_female_row['category']}
+print(max_female_dict)
