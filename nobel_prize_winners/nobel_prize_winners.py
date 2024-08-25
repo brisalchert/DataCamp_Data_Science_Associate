@@ -30,8 +30,8 @@ nobel = pd.read_csv('nobel.csv')
 top_gender = nobel['sex'].mode().values[0]
 top_country = nobel['birth_country'].mode().values[0]
 
-print(top_gender)
-print(top_country)
+print('Most commonly awarded gender: ' + top_gender)
+print('Most commonly awarded country: ' + top_country + '\n')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Determine the decade with the highest ratio of US-born winners:
@@ -45,7 +45,7 @@ us_ratios = nobel.groupby('decade', as_index=False)['us_born'].mean()
 
 # Get the decade with the maximum ratio of us winners
 max_decade_usa = int(us_ratios.loc[us_ratios['us_born'].idxmax()]['decade'])
-print(max_decade_usa)
+print('Decade with the highest ratio of US-born winners: ' + str(max_decade_usa) + '\n')
 
 # Plot the ratio data
 sns.relplot(x='decade', y='us_born', data=us_ratios, kind='line')
@@ -65,7 +65,7 @@ max_female_row = female_ratios[female_ratios['female'] == female_ratios['female'
 
 # Store the decade and category in a dictionary
 max_female_dict = {int(max_female_row['decade'].values[0]):max_female_row['category'].values[0]}
-print(max_female_dict)
+print('Decade and category with highest ratio of female winners: ' + str(max_female_dict) + '\n')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Determine the name and category for the first female winner:
@@ -80,16 +80,16 @@ first_woman = female_winners[female_winners['year'] == female_winners['year'].mi
 first_woman_name = first_woman['full_name'].values[0]
 first_woman_category = first_woman['category'].values[0]
 
-print(first_woman_name)
-print(first_woman_category)
+print('First woman to win a Nobel Prize: ' + first_woman_name)
+print('Category of the prize: ' + first_woman_category + '\n')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Get a list of all individuals or organizations with more than one win:
 
 # Get the individuals and organizations with more than one prize
-prize_counts = nobel.groupby('full_name', as_index=False)['prize'].count()
-multiple_prizes = prize_counts[prize_counts['prize'] > 1]
+prize_counts = nobel['full_name'].value_counts()
+multiple_prizes = prize_counts[prize_counts > 1].index
 
 # Convert the name column to a list
-repeat_list = list(multiple_prizes['full_name'].values)
-print(repeat_list)
+repeat_list = list(multiple_prizes)
+print('Repeat winners of Nobel Prizes: ' + str(repeat_list))
