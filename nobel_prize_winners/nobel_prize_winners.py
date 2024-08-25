@@ -33,6 +33,9 @@ top_country = nobel['birth_country'].mode().values[0]
 print(top_gender)
 print(top_country)
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Determine the decade with the highest ratio of US-born winners:
+
 # Create columns for us_born and decade
 nobel['us_born'] = np.where(nobel['birth_country'] == 'United States of America', True, False)
 nobel['decade'] = nobel['year'] - (nobel['year'] % 10)
@@ -48,6 +51,9 @@ print(max_decade_usa)
 sns.relplot(x='decade', y='us_born', data=us_ratios, kind='line')
 plt.show()
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Determine the decade and category with the highest ratio of female winners:
+
 # Create a flag column for female winners
 nobel['female'] = np.where(nobel['sex'] == 'Female', True, False)
 
@@ -61,11 +67,14 @@ max_female_row = female_ratios.max()
 max_female_dict = {int(max_female_row['decade']):max_female_row['category']}
 print(max_female_dict)
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Determine the name and category for the first female winner:
+
 # Create dataframe of female winners
 female_winners = nobel[nobel['female'] == True]
 
 # Get the row with the minimum year
-first_woman = female_winners[female_winners['year'] ==female_winners['year'].min()]
+first_woman = female_winners[female_winners['year'] == female_winners['year'].min()]
 
 # Save the name and category to strings
 first_woman_name = first_woman['full_name'].values[0]
@@ -73,3 +82,14 @@ first_woman_category = first_woman['category'].values[0]
 
 print(first_woman_name)
 print(first_woman_category)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Get a list of all individuals or organizations with more than one win:
+
+# Get the individuals and organizations with more than one prize
+prize_counts = nobel.groupby('full_name', as_index=False)['prize'].count()
+multiple_prizes = prize_counts[prize_counts['prize'] > 1]
+
+# Convert the name column to a list
+repeat_list = multiple_prizes['full_name'].values
+print(repeat_list)
