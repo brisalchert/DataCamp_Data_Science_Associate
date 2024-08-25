@@ -21,6 +21,7 @@
 import pandas as pd
 import seaborn as sns
 import numpy as np
+from matplotlib import pyplot as plt
 
 # Load the data from the csv:
 nobel = pd.read_csv('nobel.csv')
@@ -31,3 +32,18 @@ top_country = nobel['birth_country'].mode().values[0]
 
 print(top_gender)
 print(top_country)
+
+# Create columns for us_born and decade
+nobel['us_born'] = np.where(nobel['birth_country'] == 'United States of America', True, False)
+nobel['decade'] = nobel['year'] - (nobel['year'] % 10)
+
+# Calculate the mean value of 'us_born' (since True == 1 and False == 0) to obtain the ratio for each decade
+us_ratios = nobel.groupby('decade', as_index=False)['us_born'].mean()
+
+# Get the decade with the maximum ratio of us winners
+max_decade_usa = int(us_ratios.loc[us_ratios['us_born'].idxmax()]['decade'])
+print(max_decade_usa)
+
+# Plot the ratio data
+sns.relplot(x='decade', y='us_born', data=us_ratios, kind='line')
+plt.show()
