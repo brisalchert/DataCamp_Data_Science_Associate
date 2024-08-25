@@ -22,3 +22,12 @@ import pandas as pd
 import seaborn as sns
 import numpy as np
 
+# Load the data from the csv:
+nobel = pd.read_csv('nobel.csv')
+
+# Determine most commonly awarded gender and birth country:
+top_gender = nobel['sex'].mode().values[0]
+top_country = nobel['birth_country'].mode().values[0]
+
+print(top_gender)
+print(top_country)
