@@ -15,5 +15,16 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+# Read in data from crimes.csv
 crimes = pd.read_csv("crimes.csv", parse_dates=["Date Rptd", "DATE OCC"], dtype={"TIME OCC": str})
-print(crimes.head())
+
+# Find hour with the highest crime frequency
+crimes["HOUR OCC"] = crimes["TIME OCC"].str[:2].astype(int)
+peak_crime_hour = crimes.groupby("HOUR OCC").size().idxmax()
+print("Peak crime hour: " + str(peak_crime_hour))
+
+sns.countplot(data=crimes, x="HOUR OCC")
+plt.show()
+
+
