@@ -36,4 +36,13 @@ plt.xticks(rotation=90)
 sns.countplot(data=crimes, x="AREA NAME")
 plt.show()
 
+# Find the number of crimes committed against vitims of different age groups
+age_bins = [0, 17, 25, 34, 44, 54, 64, np.inf]
+age_labels = ["0-17", "18-25", "26-34", "35-44", "45-54", "55-64", "65+"]
 
+crimes["Age Bracket"] = pd.cut(crimes["Vict Age"], bins=age_bins, labels=age_labels)
+victim_ages = crimes["Age Bracket"].value_counts()
+print("Crimes per age group: \n" + str(victim_ages))
+
+sns.countplot(data=crimes, x="Age Bracket")
+plt.show()
