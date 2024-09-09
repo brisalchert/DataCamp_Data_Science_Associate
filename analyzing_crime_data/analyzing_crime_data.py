@@ -27,4 +27,13 @@ print("Peak crime hour: " + str(peak_crime_hour))
 sns.countplot(data=crimes, x="HOUR OCC")
 plt.show()
 
+# Find the location with the highest frequency of night crimes
+night_crimes = crimes[crimes["HOUR OCC"].isin([22, 23, 0, 1, 2, 3])]
+peak_night_crime_location = crimes.groupby("AREA NAME").size().sort_values(ascending=False).reset_index()["AREA NAME"][0]
+print("Peak crime area: " + peak_night_crime_location)
+
+plt.xticks(rotation=90)
+sns.countplot(data=crimes, x="AREA NAME")
+plt.show()
+
 
