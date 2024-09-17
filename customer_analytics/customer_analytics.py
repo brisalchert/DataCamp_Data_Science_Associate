@@ -34,3 +34,19 @@ ds_jobs_transformed["training_hours"] = ds_jobs_transformed["training_hours"].as
 
 # Convert city_development_index to float16
 ds_jobs_transformed["city_development_index"] = ds_jobs_transformed["city_development_index"].astype("float16")
+
+# Convert categorical data to categories
+nominal_categories = {
+    "city",
+    "gender",
+    "enrolled_university",
+    "education_level",
+    "major_discipline",
+    "experience",
+    "company_size",
+    "company_type",
+    "last_new_job"
+}
+
+for category in nominal_categories:
+    ds_jobs_transformed[category] = ds_jobs[category].astype("category")
