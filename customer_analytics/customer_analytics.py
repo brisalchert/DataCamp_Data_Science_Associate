@@ -30,7 +30,8 @@ print(ds_jobs.head())
 ds_jobs_transformed = ds_jobs.copy()
 
 # Convert boolean categories to bool
-ds_jobs_transformed["relevant_experience"] = np.where(ds_jobs["relevant_experience"].str.contains("Has", regex=False), True, False)
+ds_jobs_transformed["relevant_experience"] = \
+    np.where(ds_jobs["relevant_experience"].str.contains("Has", regex=False), True, False)
 ds_jobs_transformed["job_change"] = np.where(ds_jobs["job_change"] == 1, True, False)
 
 # Convert int64 categories to int32
@@ -63,3 +64,10 @@ ordered_cats = {
 for col in ordered_cats.keys():
     category = pd.CategoricalDtype(ordered_cats[col], ordered=True)
     ds_jobs_transformed[col] = ds_jobs_transformed[col].astype(category)
+
+# Filter for entries with experience of 10+ years and company size of 1000+
+ds_jobs_transformed = ds_jobs_transformed[(ds_jobs_transformed["experience"] >= "10") & \
+                                          (ds_jobs_transformed["company_size"] >= "1000-4999")]
+
+# View the resulting dataset
+print(ds_jobs_transformed.head())
