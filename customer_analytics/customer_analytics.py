@@ -40,18 +40,26 @@ ds_jobs_transformed["training_hours"] = ds_jobs_transformed["training_hours"].as
 # Convert city_development_index to float16
 ds_jobs_transformed["city_development_index"] = ds_jobs_transformed["city_development_index"].astype("float16")
 
-# Convert categorical data to categories
+# Convert nominal categorical data to categories
 nominal_categories = {
     "city",
     "gender",
-    "enrolled_university",
-    "education_level",
     "major_discipline",
-    "experience",
-    "company_size",
-    "company_type",
-    "last_new_job"
+    "company_type"
 }
 
 for category in nominal_categories:
     ds_jobs_transformed[category] = ds_jobs[category].astype("category")
+
+# Convert ordinal categorical data to ordered categories
+ordered_cats = {
+    "enrolled_university": ["no_enrollment", "Part time course", "Full time course"],
+    "education_level": ["Primary School", "High School", "Graduate", "Masters", "Phd"],
+    "experience": ["<1"] + list(map(str, range(1, 21))) + [">20"],
+    "company_size": ["<10", "10-49", "50-99", "100-499", "500-999", "1000-4999", "5000-9999", "10000+"],
+    "last_new_job": ["never", "1", "2", "3", "4", ">4"]
+}
+
+for col in ordered_cats.keys():
+    category = pd.CategoricalDtype(ordered_cats[col], ordered=True)
+    ds_jobs_transformed[col] = ds_jobs_transformed[col].astype(category)
