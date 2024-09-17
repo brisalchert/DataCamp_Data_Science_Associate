@@ -18,6 +18,7 @@
 
 # Import necessary libraries
 import pandas as pd
+import numpy as np
 
 # Load the dataset
 ds_jobs = pd.read_csv("customer_train.csv")
@@ -27,6 +28,10 @@ print(ds_jobs.head())
 
 # Create a copy of ds_jobs for transforming
 ds_jobs_transformed = ds_jobs.copy()
+
+# Convert boolean categories to bool
+ds_jobs_transformed["relevant_experience"] = np.where(ds_jobs["relevant_experience"].str.contains("Has", regex=False), True, False)
+ds_jobs_transformed["job_change"] = np.where(ds_jobs["job_change"] == 1, True, False)
 
 # Convert int64 categories to int32
 ds_jobs_transformed["student_id"] = ds_jobs_transformed["student_id"].astype("int32")
