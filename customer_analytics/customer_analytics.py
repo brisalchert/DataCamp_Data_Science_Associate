@@ -27,3 +27,10 @@ print(ds_jobs.head())
 
 # Create a copy of ds_jobs for transforming
 ds_jobs_transformed = ds_jobs.copy()
+
+# Convert int64 categories to int32
+ds_jobs_transformed["student_id"] = ds_jobs_transformed["student_id"].astype("int32")
+ds_jobs_transformed["training_hours"] = ds_jobs_transformed["training_hours"].astype("int32")
+
+# Convert city_development_index to float16
+ds_jobs_transformed["city_development_index"] = ds_jobs_transformed["city_development_index"].astype("float16")
