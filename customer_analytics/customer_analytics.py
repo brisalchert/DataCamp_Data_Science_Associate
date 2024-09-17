@@ -16,3 +16,14 @@
 # you should notice a substantial decrease in memory usage.
 # ----------------------------------------------------------------------------------------------------------------------
 
+# Import necessary libraries
+import pandas as pd
+
+# Load the dataset
+ds_jobs = pd.read_csv("customer_train.csv")
+
+# View the dataset
+print(ds_jobs.head())
+
+# Create a copy of ds_jobs for transforming
+ds_jobs_transformed = ds_jobs.copy()
