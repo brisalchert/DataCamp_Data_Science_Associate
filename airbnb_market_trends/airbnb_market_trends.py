@@ -38,3 +38,19 @@ print()
 airbnb_data = reviews.merge(prices, on='listing_id').merge(room_types, on='listing_id')
 
 print(airbnb_data.head())
+
+# Convert last_review column to date type
+airbnb_data['last_review'] = pd.to_datetime(airbnb_data['last_review'])
+
+# Clean and convert price to int
+airbnb_data['price'] = airbnb_data['price'].str.replace(' dollars', '', regex=False)
+airbnb_data['price'] = airbnb_data['price'].astype(int)
+
+# Convert room_type to categorical variable
+airbnb_data['room_type'] = airbnb_data['room_type'].astype('category')
+
+# Convert nbhood_full to categorical variable
+airbnb_data['nbhood_full'] = airbnb_data['nbhood_full'].astype('category')
+
+# Examine column data types
+print(airbnb_data.info())
