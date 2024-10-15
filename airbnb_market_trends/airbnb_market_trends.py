@@ -32,3 +32,9 @@ print()
 print(prices.head())
 print()
 print(room_types.head())
+print()
+
+# Merge the DataFrames
+airbnb_data = reviews.merge(prices, on='listing_id').merge(room_types, on='listing_id')
+
+print(airbnb_data.head())
