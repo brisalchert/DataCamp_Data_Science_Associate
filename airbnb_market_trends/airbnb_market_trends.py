@@ -17,4 +17,18 @@
 import pandas as pd
 import numpy as np
 
+# Load reviews as tab-separated values
+reviews = pd.read_csv('data/airbnb_last_review.tsv', sep='\t')
 
+# Load prices as comma-separated values
+prices = pd.read_csv('data/airbnb_price.csv')
+
+# Load room types as excel document
+room_types = pd.read_excel('data/airbnb_room_type.xlsx')
+
+# Examine first few values in each DataFrame
+print(reviews.head())
+print()
+print(prices.head())
+print()
+print(room_types.head())
