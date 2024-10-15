@@ -50,6 +50,7 @@ airbnb_data['price'] = airbnb_data['price'].astype(int)
 airbnb_data['room_type'] = airbnb_data['room_type'].str.lower()
 airbnb_data['room_type'] = airbnb_data['room_type'].str.replace('room', '', regex=False)
 airbnb_data['room_type'] = airbnb_data['room_type'].str.replace('home/apt', '', regex=False)
+airbnb_data['room_type'] = airbnb_data['room_type'].str.strip()
 airbnb_data['room_type'] = airbnb_data['room_type'].astype('category')
 
 # Convert nbhood_full to categorical variable
