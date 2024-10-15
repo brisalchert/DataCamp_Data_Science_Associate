@@ -75,3 +75,14 @@ print(count_private)
 avg_price = round(airbnb_data['price'].mean(), 2)
 
 print(avg_price)
+
+# Combine results into new DataFrame
+data = {
+    'first_reviewed': [earliest_review_date],
+    'last_reviewed': [most_recent_review_date],
+    'nb_private_rooms': [count_private],
+    'avg_price': [avg_price]
+}
+review_dates = pd.DataFrame(data)
+
+print(review_dates.head())
