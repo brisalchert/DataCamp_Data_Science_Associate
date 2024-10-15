@@ -65,3 +65,9 @@ most_recent_review_date = airbnb_data['last_review'].max()
 
 print(earliest_review_date)
 print(most_recent_review_date)
+
+# Find count of private listings
+print(airbnb_data['room_type'].value_counts())
+count_private = airbnb_data[airbnb_data['room_type'] == 'private'].shape[0]
+
+print(count_private)
