@@ -54,3 +54,10 @@ airbnb_data['nbhood_full'] = airbnb_data['nbhood_full'].astype('category')
 
 # Examine column data types
 print(airbnb_data.info())
+
+# Find earliest and most recent review dates
+earliest_review_date = airbnb_data['last_review'].min()
+most_recent_review_date = airbnb_data['last_review'].max()
+
+print(earliest_review_date)
+print(most_recent_review_date)
