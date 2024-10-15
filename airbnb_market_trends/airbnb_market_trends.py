@@ -46,7 +46,10 @@ airbnb_data['last_review'] = pd.to_datetime(airbnb_data['last_review'])
 airbnb_data['price'] = airbnb_data['price'].str.replace(' dollars', '', regex=False)
 airbnb_data['price'] = airbnb_data['price'].astype(int)
 
-# Convert room_type to categorical variable
+# Clean and convert room_type to categorical variable
+airbnb_data['room_type'] = airbnb_data['room_type'].str.lower()
+airbnb_data['room_type'] = airbnb_data['room_type'].str.replace('room', '', regex=False)
+airbnb_data['room_type'] = airbnb_data['room_type'].str.replace('home/apt', '', regex=False)
 airbnb_data['room_type'] = airbnb_data['room_type'].astype('category')
 
 # Convert nbhood_full to categorical variable
