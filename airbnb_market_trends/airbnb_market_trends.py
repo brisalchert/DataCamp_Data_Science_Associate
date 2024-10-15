@@ -67,7 +67,11 @@ print(earliest_review_date)
 print(most_recent_review_date)
 
 # Find count of private listings
-print(airbnb_data['room_type'].value_counts())
 count_private = airbnb_data[airbnb_data['room_type'] == 'private'].shape[0]
 
 print(count_private)
+
+# Find average listing price
+avg_price = round(airbnb_data['price'].mean(), 2)
+
+print(avg_price)
