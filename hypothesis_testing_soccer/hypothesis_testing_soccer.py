@@ -52,9 +52,9 @@ women_results["away_team"] = women_results["away_team"].astype("category")
 men_results["tournament"] = men_results["tournament"].astype("category")
 women_results["tournament"] = women_results["tournament"].astype("category")
 
-# Filter data for matches since 2002-01-01
-men_results = men_results[men_results["date"] >= "2002-01-1"]
-women_results = women_results[women_results["date"] >= "2002-01-1"]
+# Filter data for FIFA World Cup matches since 2002-01-01
+men_results = men_results[(men_results["date"] >= "2002-01-1") & (men_results["tournament"].isin(["FIFA World Cup"]))]
+women_results = women_results[(women_results["date"] >= "2002-01-1") & (women_results["tournament"].isin(["FIFA World Cup"]))]
 
 # Add column for total goals scored
 men_results["total_score"] = men_results["home_score"] + men_results["away_score"]
