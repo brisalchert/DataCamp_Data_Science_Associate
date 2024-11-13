@@ -82,3 +82,5 @@ else:
 
 # Create result dictionary for submission
 result_dict = {"p_val": p_val, "result": result}
+
+print(result_dict)
