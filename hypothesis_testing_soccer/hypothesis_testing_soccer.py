@@ -23,4 +23,19 @@ women_results = pd.read_csv("women_results.csv")
 
 # Examine both datasets
 print(men_results.head())
+print(men_results.info())
 print(women_results.head())
+print(women_results.info())
+
+# Update incorrect data types
+men_results["date"] = pd.to_datetime(men_results["date"])
+women_results["date"] = pd.to_datetime(women_results["date"])
+
+men_results["home_team"] = men_results["home_team"].astype("category")
+women_results["home_team"] = women_results["home_team"].astype("category")
+
+men_results["away_team"] = men_results["away_team"].astype("category")
+women_results["away_team"] = women_results["away_team"].astype("category")
+
+men_results["tournament"] = men_results["tournament"].astype("category")
+women_results["tournament"] = women_results["tournament"].astype("category")
