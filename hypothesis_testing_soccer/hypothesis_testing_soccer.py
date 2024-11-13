@@ -27,6 +27,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from scipy.stats import mannwhitneyu
 
 # Load both datasets
 men_results = pd.read_csv("men_results.csv")
@@ -69,3 +70,15 @@ sns.displot(x="total_score", data=women_results, kind="kde")
 plt.title("Distribution of total score in women's matches")
 plt.tight_layout()
 plt.show()
+
+# Since data is not normal, use a Mann-Whitney-U non-parametric t-test.
+stat, p_val = mannwhitneyu(women_results["total_score"], men_results["total_score"], alternative="greater")
+
+# Set result based on the p-value
+if p_val < 0.10:
+    result = "reject"
+else:
+    result = "fail to reject"
+
+# Create result dictionary for submission
+result_dict = {"p_val": p_val, "result": result}
