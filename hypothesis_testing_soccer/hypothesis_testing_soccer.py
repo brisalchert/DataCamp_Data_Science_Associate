@@ -16,6 +16,8 @@
 
 # Import required modules
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Load both datasets
 men_results = pd.read_csv("men_results.csv")
@@ -43,3 +45,18 @@ women_results["tournament"] = women_results["tournament"].astype("category")
 # Filter data for matches since 2002-01-01
 men_results = men_results[men_results["date"] >= "2002-01-1"]
 women_results = women_results[women_results["date"] >= "2002-01-1"]
+
+# Add column for total goals scored
+men_results["total_score"] = men_results["home_score"] + men_results["away_score"]
+women_results["total_score"] = women_results["home_score"] + women_results["away_score"]
+
+# Examine dataset distributions for normality
+sns.displot(x="total_score", data=men_results, kind="kde")
+plt.title("Distribution of total score in men's matches")
+plt.tight_layout()
+plt.show()
+
+sns.displot(x="total_score", data=women_results, kind="kde")
+plt.title("Distribution of total score in women's matches")
+plt.tight_layout()
+plt.show()
