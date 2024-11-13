@@ -39,3 +39,7 @@ women_results["away_team"] = women_results["away_team"].astype("category")
 
 men_results["tournament"] = men_results["tournament"].astype("category")
 women_results["tournament"] = women_results["tournament"].astype("category")
+
+# Filter data for matches since 2002-01-01
+men_results = men_results[men_results["date"] >= "2002-01-1"]
+women_results = women_results[women_results["date"] >= "2002-01-1"]
