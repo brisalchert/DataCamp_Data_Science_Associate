@@ -16,3 +16,11 @@
 
 # Import required modules
 import pandas as pd
+
+# Load both datasets
+men_results = pd.read_csv("men_results.csv")
+women_results = pd.read_csv("women_results.csv")
+
+# Examine both datasets
+print(men_results.head())
+print(women_results.head())
