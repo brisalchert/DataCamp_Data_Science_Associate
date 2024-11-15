@@ -45,7 +45,29 @@ crops["crop"] = crops["crop"].astype("category")
 print(crops.isna().sum().sort_values())
 
 # Split the dataset
-X = crops.drop(columns=["crop"]).values
-y = crops["crop"].values
+X = crops.drop(columns=["crop"])
+y = crops["crop"]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create a dictionary for each feature's performance
+features_dict = {}
+
+# Loop through the features
+for feature in X_train.columns:
+    # Create a logistic regression model (increase iterations for model convergence)
+    logreg = LogisticRegression(max_iter=10000)
+    # Fit the model to the feature of interest
+    logreg.fit(X_train[[feature]], y_train)
+    # Get predicted labels from the testing data
+    y_pred = logreg.predict(X_test[[feature]])
+
+    # Calculate F1 score as the performance metric (balance between precision and recall)
+    f1_score = metrics.f1_score(y_test, y_pred, average="weighted")
+
+    # Add the metric to the feature performance dictionary
+    features_dict[feature] = f1_score
+    print(f"F1-score for {feature}: {f1_score}")
+
+# K (potassium) has best F1-score: Store as result
+best_predictive_feature = {"K": features_dict["K"]}
