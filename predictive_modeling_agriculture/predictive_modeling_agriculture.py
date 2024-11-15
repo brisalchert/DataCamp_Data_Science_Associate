@@ -30,3 +30,16 @@ from sklearn import metrics
 
 # Load the dataset
 crops = pd.read_csv("soil_measures.csv")
+
+# View the dataset
+print(crops.head())
+print(crops.info())
+
+# View "crop" column values
+print(crops["crop"].unique())
+
+# Convert "crop" column to categorical
+crops["crop"] = crops["crop"].astype("category")
+
+# Check for missing values
+print(crops.isna().sum().sort_values())
