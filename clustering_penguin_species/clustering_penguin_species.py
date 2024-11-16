@@ -82,3 +82,8 @@ plt.xlabel("Culmen Length (mm)")
 plt.ylabel("Culmen Depth (mm)")
 plt.title("K-means Clustering (K=4)")
 plt.show()
+
+# Create submission DataFrame
+numeric_columns = ["culmen_length_mm", "culmen_depth_mm", "flipper_length_mm", "body_mass_g", "label"]
+stat_penguins = penguins_df[numeric_columns].groupby("label").mean()
+print(stat_penguins)
