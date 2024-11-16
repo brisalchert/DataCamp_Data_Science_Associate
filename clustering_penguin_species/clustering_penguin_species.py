@@ -68,3 +68,17 @@ for num_cluster in num_clusters:
 # Plot the inertia for each number of clusters
 plt.plot(num_clusters, inertias, "-o")
 plt.show()
+
+# Run KMeans for four clusters
+km = KMeans(n_clusters=4, random_state=42)
+km.fit(penguins_transformed)
+
+# Add labels to the original data
+penguins_df["label"] = km.labels_
+
+# Visualize clusters for the first two features
+plt.scatter(penguins_df["culmen_length_mm"], penguins_df["culmen_depth_mm"], c=km.labels_, cmap="viridis")
+plt.xlabel("Culmen Length (mm)")
+plt.ylabel("Culmen Depth (mm)")
+plt.title("K-means Clustering (K=4)")
+plt.show()
