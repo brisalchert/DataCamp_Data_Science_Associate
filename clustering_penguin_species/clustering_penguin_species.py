@@ -43,3 +43,10 @@ print(penguins_df.isna().sum().sort_values(ascending=False))
 
 # Convert categorical column to dummy variables
 penguins_df = pd.get_dummies(penguins_df, drop_first=True)
+
+# Initialize a StandardScaler for standardization
+scaler = StandardScaler()
+
+# Standardize the data using the scaler
+penguins_transformed = scaler.fit_transform(penguins_df)
+print(penguins_transformed)
