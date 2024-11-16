@@ -50,3 +50,21 @@ scaler = StandardScaler()
 # Standardize the data using the scaler
 penguins_transformed = scaler.fit_transform(penguins_df)
 print(penguins_transformed)
+
+# Determine optimal number of clusters for KMeans using elbow analysis
+num_clusters = range(1, 11)
+inertias = []
+
+for num_cluster in num_clusters:
+    # Initialize a KMeans object with the number of clusters
+    kmean = KMeans(n_clusters=num_cluster)
+
+    # Fit the model to the data
+    kmean.fit(penguins_transformed)
+
+    # Add the inertia to the list of inertias
+    inertias.append(kmean.inertia_)
+
+# Plot the inertia for each number of clusters
+plt.plot(num_clusters, inertias, "-o")
+plt.show()
