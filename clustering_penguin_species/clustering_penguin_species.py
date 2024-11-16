@@ -34,3 +34,12 @@ from sklearn.preprocessing import StandardScaler
 # Loading and examining the dataset
 penguins_df = pd.read_csv("penguins.csv")
 print(penguins_df.head())
+
+# Examine datatypes
+print(penguins_df.info())
+
+# Check for missing data
+print(penguins_df.isna().sum().sort_values(ascending=False))
+
+# Convert categorical column to dummy variables
+penguins_df = pd.get_dummies(penguins_df, drop_first=True)
