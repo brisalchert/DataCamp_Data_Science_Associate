@@ -18,6 +18,12 @@
 #
 #  - Split the data into X_train, y_train, X_test, and y_test train and test sets, avoiding any features that leak data
 #    about the target variable, and include 20% of the total data in the test set.
+#  - Set random_state to 9 whenever you use a function/method involving randomness, for example, when doing a
+#    test-train split.
+#
+#  Recommend a model yielding a mean squared error (MSE) less than 3 on the test set
+#
+#  - Save the model you would recommend as a variable named best_model, and save its MSE on the test set as best_mse.
 #-----------------------------------------------------------------------------------------------------------------------
 
 import pandas as pd
