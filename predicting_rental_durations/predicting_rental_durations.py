@@ -44,3 +44,7 @@ print(rentals.info())
 
 # Add column for rental length
 rentals["rental_length_days"] = (rentals["return_date"] - rentals["rental_date"]).dt.days
+
+# Create dummy variables for special features
+rentals["deleted_scenes"] = np.where(rentals["special_features"].str.contains("Deleted Scenes"), 1, 0)
+rentals["behind_the_scenes"] = np.where(rentals["special_features"].str.contains("Behind the Scenes"), 1, 0)
