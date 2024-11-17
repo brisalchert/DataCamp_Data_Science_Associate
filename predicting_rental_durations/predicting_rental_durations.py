@@ -31,3 +31,13 @@ import numpy as np
 
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
+
+# Load data
+rentals = pd.read_csv("rental_info.csv")
+print(rentals.head())
+
+# Fix date data types
+rentals["rental_date"] = pd.to_datetime(rentals["rental_date"])
+rentals["return_date"] = pd.to_datetime(rentals["return_date"])
+
+print(rentals.info())
