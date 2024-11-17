@@ -48,3 +48,21 @@ rentals["rental_length_days"] = (rentals["return_date"] - rentals["rental_date"]
 # Create dummy variables for special features
 rentals["deleted_scenes"] = np.where(rentals["special_features"].str.contains("Deleted Scenes"), 1, 0)
 rentals["behind_the_scenes"] = np.where(rentals["special_features"].str.contains("Behind the Scenes"), 1, 0)
+
+# Create DataFrame of features for regression model
+X = rentals[[
+    "amount",
+    "release_year",
+    "rental_rate",
+    "length",
+    "replacement_cost",
+    "NC-17",
+    "PG",
+    "PG-13",
+    "R",
+    "deleted_scenes",
+    "behind_the_scenes"
+]]
+
+# Create series of targets for regression model
+y = rentals["rental_length_days"]
