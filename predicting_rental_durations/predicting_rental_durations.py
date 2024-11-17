@@ -32,6 +32,10 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 
+# Lasso regression for feature selection
+from sklearn.linear_model import Lasso
+from sklearn.preprocessing import StandardScaler
+
 # Load data
 rentals = pd.read_csv("rental_info.csv")
 print(rentals.head())
@@ -69,3 +73,16 @@ y = rentals["rental_length_days"]
 
 # Split data into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=9)
+
+# Scale training data for lasso model
+scaler = StandardScaler()
+scaler.fit(X_train)
+X_train_scaled = scaler.transform(X_train)
+
+# Fit lasso model for feature selection
+lasso = Lasso(alpha=0.3, random_state=9)
+lasso.fit(X_train_scaled, y_train)
+lasso_coefficients = lasso.coef_
+
+# Select features with positive coefficients for model training
+X_train, X_test = X_train.iloc[:, lasso_coefficients > 0], X_test.iloc[:, lasso_coefficients > 0]
