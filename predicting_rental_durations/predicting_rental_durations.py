@@ -36,6 +36,13 @@ from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import Lasso
 from sklearn.preprocessing import StandardScaler
 
+# OLS
+from sklearn.linear_model import LinearRegression
+
+# Random forest
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import RandomizedSearchCV
+
 # Load data
 rentals = pd.read_csv("rental_info.csv")
 print(rentals.head())
@@ -86,3 +93,10 @@ lasso_coefficients = lasso.coef_
 
 # Select features with positive coefficients for model training
 X_train, X_test = X_train.iloc[:, lasso_coefficients > 0], X_test.iloc[:, lasso_coefficients > 0]
+
+# Fit linear regression model and get MSE
+linreg = LinearRegression()
+linreg.fit(X_train, y_train)
+y_pred = linreg.predict(X_test)
+linreg_mse = mean_squared_error(y_test, y_pred)
+print(linreg_mse)
