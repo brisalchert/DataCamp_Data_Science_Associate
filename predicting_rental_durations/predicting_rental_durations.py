@@ -100,3 +100,27 @@ linreg.fit(X_train, y_train)
 y_pred = linreg.predict(X_test)
 linreg_mse = mean_squared_error(y_test, y_pred)
 print(linreg_mse)
+
+# Create hyperparameter grid for tuning
+params_rf = {
+    "n_estimators": np.arange(1, 101, 1),
+    "max_depth": np.arange(1, 11, 1),
+}
+
+# Initialize random forest model
+rf = RandomForestRegressor()
+
+# Initialize randomized CV search for hyperparameters
+random_search_rf = RandomizedSearchCV(rf, param_distributions=params_rf, cv=10, random_state=9)
+
+# Fit the model and get the best model and parameters
+random_search_rf.fit(X_train, y_train)
+best_model = random_search_rf.best_estimator_
+best_params = random_search_rf.best_params_
+
+# Evaluate best model and get MSE
+y_pred = best_model.predict(X_test)
+rf_mse = mean_squared_error(y_test, y_pred)
+
+print(best_params)
+print(rf_mse)
