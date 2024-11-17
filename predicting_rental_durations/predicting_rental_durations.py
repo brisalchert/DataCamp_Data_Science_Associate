@@ -41,3 +41,6 @@ rentals["rental_date"] = pd.to_datetime(rentals["rental_date"])
 rentals["return_date"] = pd.to_datetime(rentals["return_date"])
 
 print(rentals.info())
+
+# Add column for rental length
+rentals["rental_length_days"] = (rentals["return_date"] - rentals["rental_date"]).dt.days
