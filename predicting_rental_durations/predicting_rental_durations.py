@@ -124,3 +124,9 @@ rf_mse = mean_squared_error(y_test, y_pred)
 
 print(best_params)
 print(rf_mse)
+
+# Save best model and lowest MSE
+best_mse = min(linreg_mse, rf_mse)
+
+if linreg_mse < rf_mse:
+    best_model = linreg_mse
